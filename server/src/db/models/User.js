@@ -40,13 +40,11 @@ module.exports = (sequelize, DataTypes) => {
 
   })
 
-  /*
   User.associate = models => {
-    User.hasMany(models.Group, {
+    User.hasMany(models.Review, {
       foreignKey: 'userId'
     })
   }
-  */
 
   User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password)

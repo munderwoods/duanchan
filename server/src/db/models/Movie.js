@@ -67,13 +67,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   })
 
-  /*
   Movie.associate = models => {
-    Movie.hasMany(models.Group, {
-      foreignKey: 'userId'
+    Movie.hasMany(models.Review, {
+      foreignKey: 'movieId'
     })
   }
-  */
 
   return Movie
 }
