@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import Movies from '@/components/Movies'
 
 Vue.use(Router)
 
@@ -13,7 +14,16 @@ let router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        title: 'DuangChan'
+        title: 'DuangChan | Home'
+      }
+    },
+
+    {
+      path: '/movies',
+      name: 'movies',
+      component: Movies,
+      meta: {
+        title: 'DuangChan | Movies'
       }
     },
 
