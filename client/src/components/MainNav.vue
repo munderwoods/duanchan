@@ -39,7 +39,7 @@ export default {
   },
 
   created () {
-    if(localStorage.getItem('user')) {
+    if (localStorage.getItem('user')) {
       this.getUserInfo()
     }
   },
