@@ -1,11 +1,6 @@
 <template>
   <div class="movie flex-column">
     {{movie.name}}
-    <br>
-    {{movie.genre}}
-    {{JSON.parse(movie.director)[0]}}
-    <br>
-    <br>
   </div>
 </template>
 
@@ -31,5 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 .movie {
+  width: 33.33%;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <div class="Movies">
-    <h1>Movies</h1>
+  <div class="movies flex-row">
     <Movie v-for="movie in movies" :key="movie.title" :movie="movie"/>
   </div>
 </template>
@@ -29,4 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.movies {
+  flex-wrap: wrap;
+}
 </style>
