@@ -6,10 +6,10 @@ const options = {
 }
 
 export default {
-  getServices () {
+  getMovies () {
     options.headers.Authorization = 'Bearer ' + localStorage.getItem('user')
     options.method = 'GET'
-    options.url = '/services'
+    options.url = '/movies'
     return axios(options)
   }
 }

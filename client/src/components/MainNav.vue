@@ -39,6 +39,7 @@ export default {
   },
 
   created () {
+    this.getMovies()
     if (localStorage.getItem('user')) {
       this.getUserInfo()
     }
@@ -52,7 +53,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'getUserInfo'
+      'getUserInfo',
+      'getMovies'
     ]),
 
     ...mapActions([

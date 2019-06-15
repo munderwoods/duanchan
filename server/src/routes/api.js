@@ -68,7 +68,7 @@ module.exports = (app) => {
   })
 
   app.get('/movies', async (req, res) => {
-    await db.Movie.findAll().then(result => {
+    await db.Movie.findAll({ order: [['year', 'ASC']] }).then(result => {
       res.json(buildResponse(true, 'Got Movies successfully.', result))
     })
   })
