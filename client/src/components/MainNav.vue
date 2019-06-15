@@ -81,7 +81,6 @@ export default {
 <style lang="scss" scoped>
 
 .page-frame {
-  padding-top: 50px;
 }
 
 .hero-heading {
@@ -90,12 +89,12 @@ export default {
 
 .nav-bar {
   display: flex;
-  background-color: blue;
   height: 50px;
   position: fixed;
   width: 100%;
   z-index: 1;
   top: 0;
+  border-bottom: solid 5px #ff0039;
 
   a {
     display: flex;
@@ -111,7 +110,7 @@ export default {
 }
 
 .router-link-exact-active {
-  background-color: dark-blue;
+  background-color: #ff0039;
 }
 
 .profile {
