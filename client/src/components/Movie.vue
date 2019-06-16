@@ -26,6 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 .movie {
-  width: 33.33%;
+  width: 100%;
 }
 </style>
