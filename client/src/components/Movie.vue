@@ -1,7 +1,7 @@
 <template>
   <div class="movie flex-column">
     {{movie.name}}
-    <button 
+    <button
       v-if="user && (!movie.Reviews.find(review => review.userId === user.id))"
       @click="postReview({movieId: movie.id, userId: user.id, review: 'Test review2.', score: 5})"
     >Review</button>
@@ -9,10 +9,10 @@
       {{review.review}}
       {{review.score}}
       <div v-if="user && (review.userId === user.id)">
-        <button>
+        <button @click="updateReview({ id: review.id, review: 'UPDATED TEST' })">
           Edit
         </button>
-        <button>
+        <button @click="deleteReview({ id: review.id })">
           Delete
         </button>
       </div>
@@ -40,7 +40,9 @@ export default {
 
   methods: {
     ...mapActions([
-      'postReview'
+      'postReview',
+      'deleteReview',
+      'updateReview'
     ])
   }
 

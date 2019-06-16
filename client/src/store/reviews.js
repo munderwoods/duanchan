@@ -19,7 +19,17 @@ const actions = {
 
   async postReview ({ commit, dispatch }, data) {
     const response = await ReviewService.postReview(data)
-    commit('RECEIVE_REVIEWS', response.data.data)
+    dispatch('getMovies', null, { root: true })
+  },
+
+  async deleteReview ({ commit, dispatch }, id) {
+    const response = await ReviewService.deleteReview(id)
+    dispatch('getMovies', null, { root: true })
+  },
+
+  async updateReview ({ commit, dispatch }, data) {
+    const response = await ReviewService.updateReview(data)
+    dispatch('getMovies', null, { root: true })
   }
 }
 

@@ -80,18 +80,23 @@ module.exports = (app) => {
     })
   })
 
-  app.post('/reviews', async (req, res) => {
-    db.Review.create({
-      userId: req.body.userId,
-      movieId: req.body.movieId,
-      review: req.body.review,
-      score: req.body.score
-    }).then(result => {
+  app.post('/reviews', checkToken.checkToken, async (req, res) => {
+    db.Review.create(req.body).then(result => {
       res.json(buildResponse(true, 'Submitted Review successfully.', result))
     }).catch(err => {
       res.json(buildResponse(false, 'Failed to submit Review.', err))
     })
-
   })
 
+  app.delete('/reviews', checkToken.checkToken, async (req, res) => {
+    await db.Review.destroy({ where: {id: parseInt(req.query.id) }}).then(result => {
+      res.json(buildResponse(true, 'Deleted Review successfully.', result))
+    }).catch(err => res.json(buildResponse(false, 'Could not find Review', err)))
+  })
+
+  app.put('/reviews', checkToken.checkToken, async (req, res) => {
+    await db.Review.update(req.body, { where: {id: req.body.id }}).then(result => {
+      res.json(buildResponse(true, 'Updated Review successfully.', result))
+    }).catch(err => res.json(buildResponse(false, 'Could not find Review', err)))
+  })
 }
