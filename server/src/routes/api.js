@@ -48,21 +48,11 @@ module.exports = (app) => {
   })
 
   app.get('/user', checkToken.checkToken, async (req, res) => {
-    const user = await getUserFromRequest(req)
+    let user = await getUserFromRequest(req)
     if (user) {
-      const userData = {
-        username: user.username,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-        level: user.level,
-        authyId: user.authyId,
-        stripeId: user.stripeId,
-        company: user.company,
-        roles: user.roles,
-        status: user.status,
-        id: user.id
-      }
-      res.json(buildResponse(true, 'Got User successfully.', userData))
+      user.password = null
+      user.confirmationToken = null
+      res.json(buildResponse(true, 'Got User successfully.', user))
     } else {
       res.json(buildResponse(false, 'Failed to find User.'))
     }
@@ -71,12 +61,6 @@ module.exports = (app) => {
   app.get('/movies', async (req, res) => {
     await db.Movie.findAll({ order: [['year', 'ASC']], include: [db.Review] }).then(result => {
       res.json(buildResponse(true, 'Got Movies successfully.', result))
-    })
-  })
-
-  app.get('/reviews', async (req, res) => {
-    await db.Review.findAll().then(result => {
-      res.json(buildResponse(true, 'Got Reviews successfully.', result))
     })
   })
 
