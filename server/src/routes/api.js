@@ -59,7 +59,8 @@ module.exports = (app) => {
         stripeId: user.stripeId,
         company: user.company,
         roles: user.roles,
-        status: user.status
+        status: user.status,
+        id: user.id
       }
       res.json(buildResponse(true, 'Got User successfully.', userData))
     } else {
@@ -72,4 +73,25 @@ module.exports = (app) => {
       res.json(buildResponse(true, 'Got Movies successfully.', result))
     })
   })
+
+  app.get('/reviews', async (req, res) => {
+    await db.Review.findAll().then(result => {
+      res.json(buildResponse(true, 'Got Reviews successfully.', result))
+    })
+  })
+
+  app.post('/reviews', async (req, res) => {
+    db.Review.create({
+      userId: req.body.userId,
+      movieId: req.body.movieId,
+      review: req.body.review,
+      score: req.body.score
+    }).then(result => {
+      res.json(buildResponse(true, 'Submitted Review successfully.', result))
+    }).catch(err => {
+      res.json(buildResponse(false, 'Failed to submit Review.', err))
+    })
+
+  })
+
 }

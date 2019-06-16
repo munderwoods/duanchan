@@ -54,10 +54,7 @@ export default {
   methods: {
     ...mapActions([
       'getUserInfo',
-      'getMovies'
-    ]),
-
-    ...mapActions([
+      'getMovies',
       'logout'
     ]),
 

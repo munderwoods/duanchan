@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import user from '@/store/user.js'
 import movies from '@/store/movies.js'
+import reviews from '@/store/reviews.js'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
 
   modules: {
     user,
-    movies
+    movies,
+    reviews
   },
 
   strict: false

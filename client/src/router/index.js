@@ -14,7 +14,7 @@ let router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        title: 'DuangChan | Home'
+        title: 'DuangChan - Home'
       }
     },
 
@@ -23,7 +23,7 @@ let router = new Router({
       name: 'movies',
       component: Movies,
       meta: {
-        title: 'DuangChan | Movies'
+        title: 'DuangChan - Movies'
       }
     },
 
