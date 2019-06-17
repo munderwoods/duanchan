@@ -36,5 +36,6 @@ export default {
 .content {
   overflow-y: auto;
   margin-bottom: 56px;
+  width: 100%;
 }
 </style>

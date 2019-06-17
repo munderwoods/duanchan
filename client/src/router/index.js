@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import About from '@/components/About'
 import Movies from '@/components/Movies'
+import News from '@/components/News'
+import Library from '@/components/Library'
 
 Vue.use(Router)
 
@@ -19,6 +22,15 @@ let router = new Router({
     },
 
     {
+      path: '/about',
+      name: 'about',
+      component: About,
+      meta: {
+        title: 'DuangChan - About'
+      }
+    },
+
+    {
       path: '/movies',
       name: 'movies',
       component: Movies,
@@ -27,7 +39,15 @@ let router = new Router({
       }
     },
 
-    /*
+    {
+      path: '/news',
+      name: 'news',
+      component: News,
+      meta: {
+        title: 'DuangChan - News'
+      }
+    },
+
     {
       path: '/library',
       name: 'library',
@@ -37,7 +57,6 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    */
 
     { path: '*', redirect: '/' }
   ]

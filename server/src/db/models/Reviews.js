@@ -8,7 +8,22 @@ module.exports = (sequelize, DataTypes) => {
 
     score: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
+    },
+
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+
+    watchList: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+
+    favorite: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
 
   })

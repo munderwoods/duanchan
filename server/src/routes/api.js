@@ -73,7 +73,7 @@ module.exports = (app) => {
   })
 
   app.delete('/reviews', checkToken.checkToken, async (req, res) => {
-    await db.Review.destroy({ where: {id: parseInt(req.query.id) }}).then(result => {
+    await db.Review.destroy({ where: { id: parseInt(req.query.id) }}).then(result => {
       res.json(buildResponse(true, 'Deleted Review successfully.', result))
     }).catch(err => res.json(buildResponse(false, 'Could not find Review', err)))
   })

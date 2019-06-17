@@ -9,7 +9,7 @@
       <router-link to="/about">About</router-link>
       <router-link to="/movies">Movies</router-link>
       <router-link to="/news">News</router-link>
-      <router-link to="/library">Your Library</router-link>
+      <router-link to="/library" v-if="user">Your Library</router-link>
 
       <div class="pull-right">
         <div v-if="user" class="flex-row">
