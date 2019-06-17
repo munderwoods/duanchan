@@ -64,6 +64,13 @@ module.exports = (app) => {
     })
   })
 
+  app.get('/reviews', async (req, res) => {
+    let user = await getUserFromRequest(req)
+    await db.Review.findAll({ where: { id: user.id } }).then(result => {
+      res.json(buildResponse(true, 'Got Reviews successfully.', result))
+    })
+  })
+
   app.post('/reviews', checkToken.checkToken, async (req, res) => {
     db.Review.create(req.body).then(result => {
       res.json(buildResponse(true, 'Submitted Review successfully.', result))
