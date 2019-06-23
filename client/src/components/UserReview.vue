@@ -1,29 +1,25 @@
 <template>
-  <div class="movie flex-column">
-    {{movie.name}}
-    <MovieControls :movie="movie"/>
-    <button
-      v-if="user && (!movie.Reviews.find(review => review.userId === user.id))"
-      @click="editReview(movie)"
-    >Review</button>
-    <div class="reviews flex-column" v-for="review in movie.Reviews" :key="review.id">
-      <UserReview v-if="review.review" :review="review"/>
+  <div class="review flex-row" v-if="review.review">
+    {{review.review}}
+    {{review.score}}
+    <div v-if="user && (review.userId === user.id) && review.score">
+      <button @click="editReview(movie, review)">
+        Edit
+      </button>
+      <button @click="deleteReview({ id: review.id })">
+        Delete
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import MovieControls from './MovieControls'
-import UserReview from './UserReview'
 
 export default {
-  name: 'movie',
-  components: {
-    MovieControls,
-    UserReview
-  },
-  props: ['movie'],
+  name: 'user-review',
+  components: { },
+  props: ['review'],
   data () {
     return {
     }
@@ -37,7 +33,6 @@ export default {
 
   methods: {
     ...mapActions([
-      'postReview',
       'deleteReview',
       'updateReview'
     ]),
@@ -55,7 +50,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.movie {
-  width: 100%;
+.review {
 }
 </style>
