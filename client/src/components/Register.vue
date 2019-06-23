@@ -8,15 +8,17 @@
          type="username"
          name="username"
          v-model="username"
+         @keyup.enter="register"
          placeholder="username" />
       <br/>
       <input
          type="password"
          name="password"
          v-model="password"
+         @keyup.enter="register"
          placeholder="password" />
       <br/>
-      <button @click="register">Register</button>
+      <button @click="register" @keyup.enter="register">Register</button>
     </div>
   </Flow>
 </template>
@@ -67,7 +69,7 @@ export default {
       if (response.data.success) {
         localStorage.setItem('user', response.data.data)
         this.getUserInfo()
-        this.showFlow = false
+        this.toggleFlow(false)
       } else {
         this.error = response.data.data.errors[0].message
       }

@@ -1,10 +1,10 @@
 <template>
   <div v-if="user" class="movie-controls flex-row">
-    <div v-if="movie.Reviews.find(review => review.userId === user.id)">
+    <div v-if="myReview">
       <button
-        v-if="movie.Reviews[0].status"
+        v-if="myReview.status"
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           status: 0,
           favorite: 0,
           userId: user.id,
@@ -14,7 +14,7 @@
       <button
         v-else
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           status: 1,
           watchList: 0,
           userId: user.id,
@@ -22,9 +22,9 @@
         })"
       >Mark as Watched</button>
       <button
-        v-if="movie.Reviews[0].favorite"
+        v-if="myReview.favorite"
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           favorite: 0,
           userId: user.id,
           movieId: movie.id
@@ -33,7 +33,7 @@
       <button
         v-else
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           favorite: 1,
           status: 1,
           userId: user.id,
@@ -41,9 +41,9 @@
         })"
       >Add to Favorites</button>
       <button
-        v-if="movie.Reviews[0].watchList"
+        v-if="myReview.watchList"
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           watchList: 0,
           userId: user.id,
           movieId: movie.id
@@ -52,17 +52,19 @@
       <button
         v-else
         @click="updateReview({
-          id: movie.Reviews[0].id,
+          id: myReview.id,
           watchList: 1,
           userId: user.id,
           movieId: movie.id
         })"
       >Add to Watch List</button>
       <button
-        v-if="movie.Reviews[0].score"
-      >Go To Review</button>
+        v-if="myReview.score"
+        @click="review({ id: myReview.id, review: myReview.review, score: myReview.score })"
+      >Edit Review</button>
       <button
         v-else
+        @click="review()"
       >Review Film</button>
     </div>
 
@@ -89,7 +91,9 @@
           movieId: movie.id
         })"
       >Add to WatchList</button>
-      <button>Review Film</button>
+      <button
+        @click="review()"
+      >Review Film</button>
     </div>
   </div>
 </template>
@@ -111,13 +115,25 @@ export default {
   computed: {
     ...mapGetters([
       'user'
-    ])
+    ]),
+
+    myReview () {
+      return this.movie.Reviews.find(review => review.userId === this.user.id)
+    }
   },
 
   methods: {
     ...mapActions([
       'updateReview'
-    ])
+    ]),
+
+    review (data) {
+      if (data) {
+        this.$eventBus.$emit('open_draft_review', { movie: this.movie, id: data.id, score: data.score, review: data.review })
+      } else {
+        this.$eventBus.$emit('open_draft_review', { movie: this.movie })
+      }
+    }
   }
 
 }

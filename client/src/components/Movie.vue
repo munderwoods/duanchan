@@ -7,15 +7,17 @@
       @click="postReview({movieId: movie.id, userId: user.id, review: 'Test review2.', score: 5})"
     >Review</button>
     <div v-for="review in movie.Reviews" :key="review.id">
-      {{review.review}}
-      {{review.score}}
-      <div v-if="user && (review.userId === user.id) && review.score">
-        <button @click="updateReview({ id: review.id, review: 'UPDATED TEST' })">
-          Edit
-        </button>
-        <button @click="deleteReview({ id: review.id })">
-          Delete
-        </button>
+      <div class="review flex-row" v-if="review.review">
+        {{review.review}}
+        {{review.score}}
+        <div v-if="user && (review.userId === user.id) && review.score">
+          <button @click="editReview(movie, review)">
+            Edit
+          </button>
+          <button @click="deleteReview({ id: review.id })">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -45,7 +47,15 @@ export default {
       'postReview',
       'deleteReview',
       'updateReview'
-    ])
+    ]),
+
+    editReview (movie, data) {
+      if (data) {
+        this.$eventBus.$emit('open_draft_review', { movie: this.movie, id: data.id, score: data.score, review: data.review })
+      } else {
+        this.$eventBus.$emit('open_draft_review', { movie: this.movie })
+      }
+    }
   }
 
 }

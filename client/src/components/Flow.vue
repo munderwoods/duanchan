@@ -1,6 +1,6 @@
 <template>
   <div class="flow-container" @click.stop>
-    <div class="flow-header" v-if="hasHeader">
+    <div class="flow-header flex-row" v-if="hasHeader">
       <i class="hidden-item"/>
       <slot name="header"></slot>
       <div @click="close">X</div>

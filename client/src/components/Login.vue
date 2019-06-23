@@ -8,15 +8,17 @@
          type="username"
          name="username"
          v-model="username"
+         @keyup.enter="login"
          placeholder="username" />
       <br/>
       <input
          type="password"
          name="password"
          v-model="password"
+         @keyup.enter="login"
          placeholder="password" />
       <br/>
-      <button @click="login">Login</button>
+      <button @click="login" @keyup.enter="login">Login</button>
     </div>
   </Flow>
 </template>
@@ -67,7 +69,7 @@ export default {
         if (response.data.success) {
           localStorage.setItem('user', response.data.data)
           this.getUserInfo()
-          this.showFlow = false
+          this.toggleFlow(false)
         }
       } catch (e) {
         console.log(e)

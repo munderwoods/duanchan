@@ -2,6 +2,7 @@
   <div class="page-frame">
     <Login/>
     <Register/>
+    <DraftReview/>
 
     <div class="nav-bar flex-row">
       <router-link to="/">Home</router-link>
@@ -29,11 +30,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import Login from './Login'
 import Register from './Register'
+import DraftReview from './DraftReview'
 
 export default {
   name: 'main-nav',
   components: {
     Login,
+    DraftReview,
     Register
   },
 
