@@ -1,6 +1,7 @@
 <template>
   <div class="movie flex-column">
     {{movie.name}}
+    <MovieControls :movie="movie"/>
     <button
       v-if="user && (!movie.Reviews.find(review => review.userId === user.id))"
       @click="postReview({movieId: movie.id, userId: user.id, review: 'Test review2.', score: 5})"
@@ -8,7 +9,7 @@
     <div v-for="review in movie.Reviews" :key="review.id">
       {{review.review}}
       {{review.score}}
-      <div v-if="user && (review.userId === user.id)">
+      <div v-if="user && (review.userId === user.id) && review.score">
         <button @click="updateReview({ id: review.id, review: 'UPDATED TEST' })">
           Edit
         </button>
@@ -22,10 +23,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import MovieControls from './MovieControls'
 
 export default {
   name: 'movie',
-  components: {},
+  components: { MovieControls },
   props: ['movie'],
   data () {
     return {
