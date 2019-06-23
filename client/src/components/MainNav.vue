@@ -68,6 +68,7 @@ export default {
     log () {
       localStorage.setItem('user', '')
       this.logout()
+      this.$router.push('/')
     }
   }
 

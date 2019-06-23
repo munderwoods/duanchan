@@ -1,20 +1,20 @@
 import Vue from 'vue'
 import ReviewService from '@/services/ReviewService'
 
-const RECEIVE_REVIEWS = 'RECEIVE_REVIEWS'
+const RECEIVE_LIBRARY = 'RECEIVE_LIBRARY'
 
 const state = {
-  reviews: null
+  library: null
 }
 
 const getters = {
-  reviews: state => state.reviews
+  library: state => state.library
 }
 
 const actions = {
-  async getReviews ({ commit, dispatch }) {
-    const response = await ReviewService.getReviews()
-    commit('RECEIVE_REVIEWS', response.data.data)
+  async getLibrary ({ commit, dispatch }) {
+    const response = await ReviewService.getLibrary()
+    commit('RECEIVE_LIBRARY', response.data.data)
   },
 
   async postReview ({ commit, dispatch }, data) {
@@ -30,12 +30,13 @@ const actions = {
   async updateReview ({ commit, dispatch }, data) {
     await ReviewService.updateReview(data)
     dispatch('getMovies', null, { root: true })
+    dispatch('getLibrary')
   }
 }
 
 const mutations = {
-  [RECEIVE_REVIEWS] (state, reviews) {
-    Vue.set(state, 'reviews', reviews)
+  [RECEIVE_LIBRARY] (state, library) {
+    Vue.set(state, 'library', library)
   }
 }
 

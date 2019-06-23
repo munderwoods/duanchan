@@ -5,11 +5,11 @@ module.exports = {
     return queryInterface.bulkInsert('Reviews', [{
       movieId: 1,
       userId: 1,
-      score: null,
+      score: 5,
       status: 0,
       favorite: 1,
       watchList: 1,
-      review: null,
+      review: 'It is good.',
       createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
       updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }], {})

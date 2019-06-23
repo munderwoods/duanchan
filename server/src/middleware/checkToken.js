@@ -1,5 +1,5 @@
 let jwt = require('jsonwebtoken')
-const jwtSecret = require('../../config/jwtSecret.js')
+const secrets = require('../../config/secrets.js')
 
 let checkToken = (req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers['authorization'] // Express headers are auto converted to lowercase
@@ -9,7 +9,7 @@ let checkToken = (req, res, next) => {
   }
 
   if (token) {
-    jwt.verify(token, jwtSecret.secret, (err, decoded) => {
+    jwt.verify(token, secrets.jwt, (err, decoded) => {
       if (err) {
         return res.json({
           success: false,

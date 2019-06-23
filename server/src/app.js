@@ -4,7 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
-const sessionSecret = require('../config/sessionSecret.js')
+const secrets = require('../config/secrets.js')
 
 const PORT = process.env.PORT || 8081
 const db = require('./db/models')
@@ -13,7 +13,7 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(session({ secret: sessionSecret.secret, resave: true, saveUninitialized: true }))
+app.use(session({ secret: secrets.session, resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 
