@@ -59,7 +59,7 @@
         })"
       >Add to Watch List</button>
       <button
-        v-if="myReview.score"
+        v-if="myReview.score !== null"
         @click="review({ id: myReview.id, review: myReview.review, score: myReview.score })"
       >Edit Review</button>
       <button
@@ -70,14 +70,14 @@
 
     <div v-else class="flex-row">
       <button
-        @click="updateReview({
+        @click="postReview({
           status: 1,
           userId: user.id,
           movieId: movie.id
         })"
       >Mark as Watched</button>
       <button
-        @click="updateReview({
+        @click="postReview({
           favorite: 1,
           status: 1,
           userId: user.id,
@@ -85,7 +85,7 @@
         })"
       >Add to Favorites</button>
       <button
-        @click="updateReview({
+        @click="postReview({
           watchList: 1,
           userId: user.id,
           movieId: movie.id
@@ -124,12 +124,18 @@ export default {
 
   methods: {
     ...mapActions([
+      'postReview',
       'updateReview'
     ]),
 
-    review (data) {
-      if (data) {
-        this.$eventBus.$emit('open_draft_review', { movie: this.movie, id: data.id, score: data.score, review: data.review })
+    review () {
+      if (this.myReview) {
+        this.$eventBus.$emit('open_draft_review', {
+          movie: this.movie,
+          id: this.myReview.id,
+          score: this.myReview.score,
+          review: this.myReview.review
+        })
       } else {
         this.$eventBus.$emit('open_draft_review', { movie: this.movie })
       }

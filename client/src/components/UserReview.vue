@@ -1,9 +1,9 @@
 <template>
-  <div class="review flex-row" v-if="review.review">
+  <div class="review flex-row" v-if="review.score !== null">
     {{review.review}}
     {{review.score}}
-    <div v-if="user && (review.userId === user.id) && review.score">
-      <button @click="editReview(movie, review)">
+    <div v-if="user && (review.userId === user.id)">
+      <button @click="editReview()">
         Edit
       </button>
       <button @click="deleteReview({ id: review.id })">
@@ -19,7 +19,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'user-review',
   components: { },
-  props: ['review'],
+  props: ['review', 'movie'],
   data () {
     return {
     }
@@ -37,12 +37,8 @@ export default {
       'updateReview'
     ]),
 
-    editReview (movie, data) {
-      if (data) {
-        this.$eventBus.$emit('open_draft_review', { movie: this.movie, id: data.id, score: data.score, review: data.review })
-      } else {
-        this.$eventBus.$emit('open_draft_review', { movie: this.movie })
-      }
+    editReview () {
+      this.$eventBus.$emit('open_draft_review', { movie: this.movie, id: this.review.id, score: this.review.score, review: this.review.review })
     }
   }
 

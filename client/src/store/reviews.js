@@ -20,12 +20,14 @@ const actions = {
   async postReview ({ commit, dispatch }, data) {
     const response = await ReviewService.postReview(data)
     dispatch('getMovies', null, { root: true })
+    dispatch('getLibrary')
     return response.data
   },
 
   async deleteReview ({ commit, dispatch }, id) {
     await ReviewService.deleteReview(id)
     dispatch('getMovies', null, { root: true })
+    dispatch('getLibrary')
   },
 
   async updateReview ({ commit, dispatch }, data) {

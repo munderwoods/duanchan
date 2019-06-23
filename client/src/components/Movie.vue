@@ -7,7 +7,7 @@
       @click="editReview(movie)"
     >Review</button>
     <div class="reviews flex-column" v-for="review in movie.Reviews" :key="review.id">
-      <UserReview v-if="review.review" :review="review"/>
+      <UserReview v-if="review.review" :review="review" :movie="movie"/>
     </div>
   </div>
 </template>

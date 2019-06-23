@@ -89,14 +89,18 @@ module.exports = (app) => {
   })
 
   app.put('/reviews', checkToken.checkToken, async (req, res) => {
-    await db.Review.update(req.body, { where: {id: req.body.id }}).then(result => {
-      res.json(buildResponse(true, 'Updated Review successfully.', result))
+    db.Review.update(req.body, { where: {id: req.body.id }}).then(result => {
+      if (result > 0) {
+        res.json(buildResponse(true, 'Updated Review successfully.', result))
+      } else {
+        db.Review.create(req.body).then(result => {
+          res.json(buildResponse(true, 'Submitted Review successfully.', result))
+        }).catch(err => {
+          res.json(buildResponse(false, 'Failed to submit Review.', err))
+        })
+      }
     }).catch(err => {
-      db.Review.create(req.body).then(result => {
-        res.json(buildResponse(true, 'Submitted Review successfully.', result))
-      }).catch(err => {
-        res.json(buildResponse(false, 'Failed to submit Review.', err))
-      })
+      res.json(buildResponse(false, 'Failed to Update Review.', err))
     })
   })
 }

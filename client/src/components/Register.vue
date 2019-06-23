@@ -8,6 +8,7 @@
          type="username"
          name="username"
          v-model="username"
+         maxlength="20"
          @keyup.enter="register"
          placeholder="username" />
       <br/>
@@ -15,6 +16,7 @@
          type="password"
          name="password"
          v-model="password"
+         maxlength="20"
          @keyup.enter="register"
          placeholder="password" />
       <br/>

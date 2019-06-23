@@ -22,10 +22,12 @@ export default {
   },
 
   deleteReview (data) {
+    data.score = null
+    data.review = null
     options.headers.Authorization = 'Bearer ' + localStorage.getItem('user')
-    options.method = 'DELETE'
+    options.method = 'PUT'
     options.url = '/reviews'
-    options.params = data
+    options.data = data
     return axios(options)
   },
 
