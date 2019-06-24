@@ -1174,7 +1174,7 @@ module.exports = {
         updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
       },
       {
-        "name": "To Kill WIth Intrigue",
+        "name": "To Kill With Intrigue",
         "synopsis": "Chin Chang Yin leads a gang known as the Killer Bees on a revenge mission to kill Cao Lei and his family, falling in love with Lei in the process.",
         "trailer": "dcjdsjItFmo",
         "year": 1977,
