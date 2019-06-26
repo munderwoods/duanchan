@@ -16,6 +16,7 @@ const actions = {
   async getUserInfo ({ commit, dispatch }) {
     const response = await UserService.getUser()
     commit('RECEIVE_USER_INFO', response.data.data)
+    dispatch('getLibrary', null, { root: true })
   },
 
   logout ({ commit, dispatch }) {

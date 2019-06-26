@@ -9,7 +9,14 @@ export default {
   getLibrary () {
     options.headers.Authorization = 'Bearer ' + localStorage.getItem('user')
     options.method = 'GET'
-    options.url = '/library'
+    options.url = '/reviews'
+    return axios(options)
+  },
+
+  getReviews (data) {
+    options.headers.Authorization = 'Bearer ' + localStorage.getItem('user')
+    options.method = 'GET'
+    options.url = `/reviews?id=${data}`
     return axios(options)
   },
 

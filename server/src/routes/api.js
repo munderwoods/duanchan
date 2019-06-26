@@ -59,19 +59,22 @@ module.exports = (app) => {
   })
 
   app.get('/movies', async (req, res) => {
-    await db.Movie.findAll({ order: [['year', 'ASC']], include: [db.Review] }).then(result => {
+    await db.Movie.findAll({ order: [['id', 'ASC']] }).then(result => {
       res.json(buildResponse(true, 'Got Movies successfully.', result))
     })
   })
 
-  app.get('/library', async (req, res) => {
+  app.get('/reviews', async (req, res) => {
     let user = await getUserFromRequest(req)
-    await db.Movie.findAll({ order: [['year', 'ASC']], include: [{ model: db.Review, required: false, where: {userId: user.id } }] }).then(result => {
-      res.json(buildResponse(true, 'Got Library successfully.', result))
-    })
-    await db.Review.findAll({ where: { id: user.id } }).then(result => {
-      res.json(buildResponse(true, 'Got Reviews successfully.', result))
-    })
+    if (req.query.id) {
+      await db.Review.findAll({ where: { id: req.query.id } }).then(result => {
+        res.json(buildResponse(true, 'Got Reviews successfully.', result))
+      })
+    } else {
+      await db.Movie.findAll({ order: [['id', 'ASC']], include: [{ model: db.Review, required: false, where: {userId: user.id } }] }).then(result => {
+        res.json(buildResponse(true, 'Got Library successfully.', result))
+      })
+    }
   })
 
   app.post('/reviews', checkToken.checkToken, async (req, res) => {

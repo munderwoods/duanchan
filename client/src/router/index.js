@@ -5,6 +5,7 @@ import About from '@/components/About'
 import Movies from '@/components/Movies'
 import News from '@/components/News'
 import Library from '@/components/Library'
+import MoviePage from '@/components/MoviePage'
 
 Vue.use(Router)
 
@@ -55,6 +56,16 @@ let router = new Router({
       meta: {
         title: 'DuangChan - Library',
         requiresAuth: true
+      }
+    },
+
+    {
+      path: '/movie/:name',
+      name: 'movie',
+      component: MoviePage,
+      meta: {
+        title: `DuangChan - Movie`,
+        requiresAuth: false
       }
     },
 

@@ -35,7 +35,6 @@ export default {
   },
 
   mounted () {
-    this.getLibrary()
   },
 
   computed: {
@@ -47,7 +46,6 @@ export default {
 
   methods: {
     ...mapActions([
-      'getLibrary',
       'updateReview'
     ])
   }
